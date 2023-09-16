@@ -30,7 +30,7 @@ enum Step {
   DEAL_DRAGON_1 = 5;
   // 派發虎例牌
   DEAL_TIGER_1 = 6;
- 
+
   // 開放下注
   OPEN_FOR_BETTING = 9;
   // 停止下注
@@ -52,7 +52,7 @@ enum Seat {
   DRAGON = 1;
   // 虎
   TIGER = 2;
-  // Dealer 
+  // Dealer
   DEALER = 3;
   // Discard
   DISCARD = 4;
@@ -80,5 +80,64 @@ enum CancelReason {
   CANCEL_REASON_UNSPECIFIED = 0;
   // 取消說明原因
   NO_REASON = 1;
-  
+
+}
+
+/**
+ * The state of the game flow
+ */
+enum GameState {
+  STATE_IDLE = 0;             // Idle
+  STATE_START = 1;            // Game Starting
+  STATE_COUNTER_START = 2;    // Counuter Started
+  STATE_DRAGON = 3;           // Scan the dragon card
+  STATE_TIGER = 4;            // Scan the tiger card
+  STATE_END = 7;              // Game Ended
+  STATE_CONFIRM = 8;          // Wait for confirm
+  STATE_DISCARD = 9;          // Scane the discard
+
+  STATE_SHUFFLE = 30;          // Shuffle cards
+}
+
+enum WinType {
+  NULL    = 0;
+  WIN_DRAGON  = 1;
+  WIN_TIGER   = 2;
+  WIN_TIE     = 3;
+}
+
+/**
+* The status fo the current game.
+*/
+message GameStatus {
+  string sessionID = 1;       // Unique tableid
+  string gameRoundID = 2;     // Unique session for the game
+  string tableID = 3;         // Unique tableid
+  GameState state = 4;        // State of the game
+  int64 startTime = 5;        // Time when game start
+  string shoeID = 6;          // Shoe ID
+  int32 shoe =7;
+  int32 round =8;
+  // game specify information
+  string dragonCard = 10;     // Card slot Dragon
+  string tigerCard = 11;      // Card slot Tiger
+  string dragonBarcode = 12;     //  Dragon Barcode
+  string tigerBarcode = 13;      //  Tiger Barcode
+  int32 dragonPoint = 20;     // Dragon Point
+  int32 tigerPoint = 21;      // Tiger Point
+  int32 countdown = 30;       // Coundown value
+  WinType winType = 31;       // Wintype
+
+  bool redcard = 90;          // If redcard scan
+
+  repeated string maskedCardsSN = 103; // masked cards sn slice for blockchan
+  repeated string hashedCards = 104;  // sha256 cards from masked cards sn
+  bool showFirstCard = 105;           // show first card boolean when new shoe
+  string firstCard = 106;             // first card of the shoe
+  int32 currentCardIndex = 107;       // next card to show (i.e. first maskedCardsSN haven't been shown's index)
+  int32 redCardIndex = 108;           // the red card index of the shoe
+  string cosmosShoeID = 109;          // cosmos blockchain id for the shoe
+  int32 hashedLength = 110;           // length of hashedCards
+  map<string, int32> scannerType = 112;  // 0: barcode 1:image recognition
+  map<string, int32> lucky = 150;     // Lucky Number and payout ratio
 }

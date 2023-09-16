@@ -60,3 +60,40 @@ enum ResultRecordType {
   PITBOSS_MODIFY_RESULT = 2;
 
 }
+
+/**
+ * The state of the game flow
+ */
+enum GameState {
+  STATE_IDLE = 0;             // Idle
+  STATE_START = 1;            // Game Starting
+  STATE_COUNTER_START = 2;    // Counuter Started
+  STATE_INPUT = 3;            // Wait for input
+  STATE_END = 7;              // Game Ended
+  STATE_CONFIRM = 8;          // Game Ended
+  STATE_SHUFFLE = 30;          // Shuffle cards
+}
+
+/**
+ * The status fo the current game.
+ */
+message GameStatus {
+  string sessionID = 1;           // Unique tableid
+  string gameRoundID = 2;         // Unique session for the game
+  string tableID = 3;             // Unique tableid
+  GameState state = 4;            // State of the game
+  int64 startTime = 5;            // Time when game start
+  string shoeID = 6;              // Shoe ID
+  int32 shoe =7;
+  int32 round =8;
+
+  // game specify information
+  int32 value = 10;               // Value of the input
+  string raw = 11;                // Value of the input
+  int32 direction = 12;       // Direction of the input
+  int64 dealstarttime = 14;   // Deal start time for blockchain
+  int64 dealcountdown = 15;   // Deal count down for  blockchain
+  string maskedcardssn = 16;  // maskedcardssn for blockchain
+  int32 countdown = 30;           // Coundown value
+  map<string, int32> lucky = 40;   // Lucky Number and payout ratio
+}

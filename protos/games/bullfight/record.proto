@@ -98,5 +98,105 @@ enum CancelReason {
   CANCEL_REASON_UNSPECIFIED = 0;
   // 取消說明原因
   NO_REASON = 1;
-  
+
+}
+
+/**
+ * The state of the game flow
+ */
+enum GameState {
+  STATE_IDLE = 0;             // idle
+  STATE_START = 1;            // game starting
+  STATE_COUNTER_START = 2;    // counter started
+  STATE_COUNTER_END = 3;      // scanned the first card ; wait for counter end
+  STATE_REVEAL_FIRST = 4;     // counter ended ; wait for the first position scan
+  STATE_REVEAL_SECOND = 5;    // scanned the first position ; wait for the second position scan
+  STATE_REVEAL_THIRD = 6;     // scanned the second position ; wait for the third position scan
+  STATE_REVEAL_FOURTH = 7;    // scanned the third position ; wait for the fourth position scan
+  STATE_CONFIRM = 8;          // scanned the fourth position ; wait for confirm
+  STATE_END = 9;              // game ended
+  // STATE_DISCARD = 9;          // Scane the discard
+
+  STATE_SHUFFLE = 30;         // shuffle cards
+}
+
+enum WinType {
+  NULL    = 0;
+  WIN_PLAYER  = 1;
+  WIN_BANKER  = 2;
+}
+
+enum PatternType {
+  NO_COW          = 0;    // 無牛
+  COW_ONE         = 11;   // 牛1
+  COW_TWO         = 12;   // 牛2
+  COW_THREE       = 13;   // 牛3
+  COW_FOUR        = 14;   // 牛4
+  COW_FIVE        = 15;   // 牛5
+  COW_SIX         = 16;   // 牛6
+  COW_SEVEN       = 17;   // 牛7
+  COW_EIGHT       = 18;   // 牛8
+  COW_NINE        = 19;   // 牛9
+  COW_COW         = 20;   // 牛牛
+  FIVE_FLOWER    = 30;   // 五公
+  TYPE_NULL       = -1;
+}
+
+/**
+ * The status fo the current game.
+ */
+message GameStatus {
+  string sessionID = 1;       // Unique tableid
+  string gameRoundID = 2;     // Unique session for the game
+  string tableID = 3;         // Unique tableid
+  GameState state = 4;        // State of the game
+  int64 startTime = 5;        // Time when game start
+  string shoeID = 6;          // Shoe ID
+  int32 shoe = 7;
+  int32 round = 8;
+
+  // game specify information
+
+  int32 countdown = 40;       // Coundown value
+
+  string firstCard = 10;          // First card
+  string revealingPosition = 39;  // Next position to be revealed: b1 / b2 /... / z5
+  string b1 = 11;                 // Card slot Banker 1
+  string b2 = 12;                 // Card slot Banker 2
+  string b3 = 13;                 // Card slot Banker 3
+  string b4 = 14;                 // Card slot Banker 4
+  string b5 = 15;                 // Card slot Banker 5
+  string x1 = 16;                 // Card slot PlayerX 1
+  string x2 = 17;                 // Card slot PlayerX 2
+  string x3 = 18;                 // Card slot PlayerX 3
+  string x4 = 19;                 // Card slot PlayerX 4
+  string x5 = 20;                 // Card slot PlayerX 5
+  string y1 = 21;                 // Card slot PlayerY 1
+  string y2 = 22;                 // Card slot PlayerY 2
+  string y3 = 23;                 // Card slot PlayerY 3
+  string y4 = 24;                 // Card slot PlayerY 4
+  string y5 = 25;                 // Card slot PlayerY 5
+  string z1 = 26;                 // Card slot PlayerZ 1
+  string z2 = 27;                 // Card slot PlayerZ 2
+  string z3 = 28;                 // Card slot PlayerZ 3
+  string z4 = 29;                 // Card slot PlayerZ 4
+  string z5 = 30;                 // Card slot PlayerZ 5
+  PatternType bankerType = 31;    // Banker pattern type
+  PatternType playerXType = 32;   // PlayerX pattern type
+  PatternType playerYType = 33;   // PlayerY pattern type
+  PatternType playerZType = 34;   // PlayerZ pattern type
+  WinType playerXWin = 35;        // 0  - none, 1 - player X win, 2 - banker win
+  WinType playerYWin = 36;        // 0  - none, 1 - player Y win, 2 - banker win
+  WinType playerZWin = 37;        // 0  - none, 1 - player Z win, 2 - banker win
+
+  bool redcard = 90;          // If redcard scan
+  repeated string maskedCardsSN = 103; // masked cards sn slice for blockchan
+  repeated string hashedCards = 104;  // sha256 cards from masked cards sn
+  // bool showFirstCard = 105;           // show first card boolean when new shoe
+  // string firstCard = 106;             // first card of the shoe
+  // int32 currentCardIndex = 107;       // next card to show (i.e. first maskedCardsSN haven't been shown's index)
+  // int32 redCardIndex = 108;           // the red card index of the shoe
+  string cosmosShoeID = 109;          // cosmos blockchain id for the shoe
+  int32 hashedLength = 110;           // length of hashedCards
+  map<string, int32> lucky = 150;     // Lucky Number and payout ratio
 }

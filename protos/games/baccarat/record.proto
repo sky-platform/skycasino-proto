@@ -37,6 +37,8 @@ enum Step {
 
   // 開放下注
   OPEN_FOR_BETTING = 8;
+  // 倒數
+  COUNTDOWN = 27;
   // 停止下注
   CLOSE_THE_BETTING = 9;
 
@@ -67,7 +69,7 @@ enum Step {
   PITBOSS_MODIFY_PLAYER_EXTRA = 25;
   // PITBOSS 修改派發莊家補牌
   PITBOSS_MODIFY_BANKER_EXTRA = 26;
-  
+
 }
 
 // 座位功能代碼
@@ -75,7 +77,7 @@ enum Seat {
 
   // 未指定
   SEAT_UNSPECIFIED = 0;
-  // Dealer 
+  // Dealer
   DEALER = 1;
   // 閒家
   PLAYER = 2;
@@ -105,5 +107,76 @@ enum CancelReason {
   CANCEL_REASON_UNSPECIFIED = 0;
   // 取消說明原因
   NO_REASON = 1;
-  
+
+}
+
+/**
+ * The state of the game flow
+ */
+enum GameState {
+  STATE_IDLE = 0;             // Idle
+  STATE_START = 1;            // Game Starting
+  STATE_COUNTER_START = 2;    // Counuter Started
+  STATE_BANKER = 3;           // Scan the banker card
+  STATE_PLAYER = 4;           // Scan the player card
+  STATE_BANKER_EXTRA = 5;     // Scan the banker extra card
+  STATE_PLAYER_EXTRA = 6;     // Scan the player extra card
+  STATE_END = 7;              // Game Ended
+  STATE_CONFIRM = 8;          // Game Ended
+
+  STATE_PEEK = 20;              // When me for banker and card
+  STATE_PEEK_BANKER = 22;       // When me for banker extra card
+  STATE_PEEK_PLAYER = 24;       // When me for player extra card
+
+  STATE_SHUFFLE = 30;          // Shuffle cards
+}
+
+/**
+ * The status fo the current game.
+ */
+message GameStatus {
+  string sessionID = 1;         // Unique tableid
+  string gameRoundID = 2;     // Unique session for the game
+  string tableID = 3;         // Unique tableid
+  GameState state = 4;        // State of the game
+  int64 startTime = 5;        // Time when game start
+  int32 shoe =6;
+  int32 round =7;
+  // game specify information
+  string a1 = 10;                 // Card slot Banker 1
+  string a2 = 11;                 // Card slot Banker 2
+  string a3 = 12;                 // Card slot Banker 3
+  string b1 = 13;                 // Card slot Player 1
+  string b2 = 14;                 // Card slot Player 2
+  string b3 = 15;                 // Card slot Player 3
+  bool wina = 16;                 // Result of banker
+  bool winb = 17;                 // Result of player
+  int32 countdown = 18;           // Coundown value
+  string shoeID = 19;             // Shoe ID
+  int32 playerPoint = 20;         // Player Point
+  int32 bankerPoint = 21;         // Banker Point
+  int32 winType = 22; //WinType
+  int32 bv = 23;  //bv
+  int32 pv = 24;  //pv
+  bool bp = 25;  //bp
+  bool pp = 26;  //pp
+  bool playerExtraCard = 30;      // Player Point
+  bool bankerExtraCard  = 31;     // Banker Point
+  int64 peekcardtime = 32;        // Time when peek card
+  int32 isSuperSix = 40;          // SuperSix -1=unknown 0=false 1=true
+  int32 isBankerPair = 41;        // Banker Pair -1=unknown 0=false 1=true
+  int32 isPlayerPair = 42;        // Player Pair-1=unknown 0=false 1=true
+  bool redcard = 90;
+  int32 countdownA = 101;           // Coundown value for me first batch of card
+  int32 countdownB = 102;           // Coundown value for me extra card
+  repeated string maskedCardsSN = 103; // masked cards sn slice for blockchan
+  repeated string hashedCards = 104;  // sha256 cards from masked cards sn
+  bool showFirstCard = 105;           // show first card boolean when new shoe
+  string firstCard = 106;             // first card of the shoe
+  int32 currentCardIndex = 107;       // next card to show (i.e. first maskedCardsSN haven't been shown's index)
+  int32 redCardIndex = 108;           // the red card index of the shoe
+  string cosmosShoeID = 109;          // cosmos blockchain id for the shoe
+  int32 hashedLength = 110;           // length of hashedCards
+  map<string, int32> lucky = 111;     // Lucky Number and payout ratio
+  map<string, int32> scannerType = 112;  // 0: barcode 1:image recognition
 }
