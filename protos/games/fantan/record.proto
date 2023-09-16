@@ -34,7 +34,7 @@ enum Step {
 
   // PITBOSS 修改骰點
   PITBOSS_MODIFY_BOWL = 16;
-  
+
 }
 
 // 座位功能代碼
@@ -42,7 +42,7 @@ enum Seat {
 
   // 未指定
   SEAT_UNSPECIFIED = 0;
-  // Dealer 
+  // Dealer
   DEALER = 1;
   // Pitboss
   PITBOSS = 9;
@@ -59,4 +59,39 @@ enum ResultRecordType {
   // Pitboss 修正
   PITBOSS_MODIFY_RESULT = 2;
 
+}
+
+/**
+ * The state of the game flow
+ */
+enum GameState {
+  STATE_IDLE = 0;             // Idle
+  STATE_START = 1;            // Game Starting
+  STATE_COUNTER_START = 2;    // Counuter Started
+  STATE_INPUT = 3;            // Wait for input
+  STATE_END = 7;              // Game Ended
+  STATE_CONFIRM = 8;          // Game Ended
+  STATE_SHUFFLE = 30;          // Shuffle cards
+}
+
+/**
+ * The status of the current game.
+ */
+message GameStatus {
+  string session_id = 1;           // Unique tableid
+  string game_round_id = 2;   	    // Unique session for the game
+  string table_id = 3;     	    // Unique tableid
+  GameState state = 4;    	    // State of the game
+  int64 ts_start = 5;    	    // Time when game start
+  string shoe_id = 6;     	        // Shoe ID
+  int32 shoe =7;
+  int32 round =8;
+  int32 count = 9;
+  int32 fan = 10;
+  int32 odd = 11;
+  int32 countdown = 16;           // Coundown value
+  int64 ts_deal = 18;   // Deal start time for blockchain
+  int64 deal_countdown = 19;   // Deal count down for  blockchain
+  string masked_card_sn = 20;  // maskedcardssn for blockchain
+  map<string, int32> lucky = 150;     // Lucky Number and payout ratio
 }

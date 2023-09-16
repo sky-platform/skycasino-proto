@@ -47,7 +47,7 @@ enum Step {
 
   // PITBOSS 修改派發例牌
   PITBOSS_MODIFY_NORMAL = 24;
-  
+
 }
 
 // 座位功能代碼
@@ -55,7 +55,7 @@ enum Seat {
 
   // 未指定
   SEAT_UNSPECIFIED = 0;
-  // Dealer 
+  // Dealer
   DEALER = 1;
   // 莊家
   BANKER = 2;
@@ -85,5 +85,89 @@ enum CancelReason {
   CANCEL_REASON_UNSPECIFIED = 0;
   // 取消說明原因
   NO_REASON = 1;
-  
+
+}
+
+/**
+ * The state of the game flow
+ */
+enum GameState {
+  STATE_IDLE = 0;             // Idle
+  STATE_START = 1;            // Game Starting
+  STATE_COUNTER_START = 2;    // Counuter Started
+  STATE_DRAGON = 3;           // Scan the dragon card
+  STATE_PHOENIX = 4;            // Scan the phoenix card
+  STATE_DRAGON_LAST = 5;           // Scan the dragon extra card
+  STATE_PHOENIX_LAST = 6;            // Scan the phoenix extra card
+  STATE_END = 7;              // Game Ended
+  STATE_CONFIRM = 8;          // Wait for confirm
+  STATE_DISCARD = 9;          // Scane the discard
+  STATE_SHUFFLE = 30;          // Shuffle cards
+}
+
+// WinType_PHOENIX 銀 右 莊
+// WinType_DRAGON 金 左 閒
+enum WinType {
+  NULL    = 0;
+  WIN_DRAGON  = 1;
+  WIN_PHOENIX   = 2;
+  WIN_TIE     = 3;
+}
+
+// 豹子 > 同花順 > 同花 > 順子 > 對子 > 散牌
+enum CardStyle {
+  NONE    = 0;            // 散牌
+  PAIR   = 1;             // 對子
+  STRAIGHT   = 2;         // 順子
+  FLUSH   = 3;            // 同花
+  STRAIGHTF  = 4;         // 順子
+  LEOPARD  = 5;           // 豹子
+  LEOPARD_KILLER  = 6;    // 豹子殺手
+}
+
+/**
+ * The status fo the current game.
+ */
+message GameStatus {
+  string sessionID = 1;       // Unique tableid
+  string gameRoundID = 2;     // Unique session for the game
+  string tableID = 3;         // Unique tableid
+  GameState state = 4;        // State of the game
+  int64 startTime = 5;        // Time when game start
+  string shoeID = 6;          // Shoe ID
+  int32 shoe =7;
+  int32 round =8;
+  int64 shuffleTime = 9;        // Time when game start
+  int32 countdown = 10;       // Coundown value
+  bool redcard = 11;          // If redcard scan
+  // game specify information
+  string dragon1 = 20;
+  string dragon2 = 21;
+  string dragon3 = 22;
+  string phoenix1 = 23;
+  string phoenix2 = 24;
+  string phoenix3 = 25;
+  map<string,string> dragonBarcode = 26;
+  map<string,string> phoenixBarcode = 27;
+  // results
+  WinType winType = 30;       // Wintype
+  string dragonResult = 31;
+  string phoenixResult = 32;
+  CardStyle dragonResultInt = 33;
+  CardStyle phoenixResultInt = 34;
+  string dragonWinValue = 35;
+  string phoenixWinValue = 36;
+  map<string,string> barcodeHash = 37;        // store the bardcodehash for that round
+  map<string,string> barcodeSN = 38;           // store the bardcodehash SN for that round
+
+  // blockchain
+  repeated string maskedCardsSN = 103; // masked cards sn slice for blockchan
+  repeated string hashedCards = 104;  // sha256 cards from masked cards sn
+  bool showFirstCard = 105;           // show first card boolean when new shoe
+  string firstCard = 106;             // first card of the shoe
+  int32 currentCardIndex = 107;       // next card to show (i.e. first maskedCardsSN haven't been shown's index)
+  int32 redCardIndex = 108;           // the red card index of the shoe
+  string cosmosShoeID = 109;          // cosmos blockchain id for the shoe
+  int32 hashedLength = 110;           // length of hashedCards
+  map<string, int32> lucky = 150;     // Lucky Number and payout ratio
 }
