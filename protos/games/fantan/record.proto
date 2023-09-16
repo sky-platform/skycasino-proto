@@ -95,3 +95,11 @@ message GameStatus {
   string masked_card_sn = 20;  // maskedcardssn for blockchain
   map<string, int32> lucky = 150;     // Lucky Number and payout ratio
 }
+
+enum WinType {
+  NULL = 0;
+  WIN_FAN1 = 1;
+  WIN_FAN2 = 2;
+  WIN_FAN3 = 3;
+  WIN_FAN4 = 4;
+}
