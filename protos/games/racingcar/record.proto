@@ -1,0 +1,147 @@
+syntax = "proto3";
+package games.racingcar;
+
+enum ResourceType {
+
+  // 未指定
+  RESOURCE_TYPE_UNSPECIFIED = 0;
+  // 牌靴
+  SHOE = 1;
+  // 例牌
+  NORMAL = 2;
+  // 非例牌
+  EXTRA = 3;
+
+}
+
+// 步驟，依據遊戲供應商邏輯，不是每個步驟都會走到
+enum Step {
+
+  // 未指定
+  STEP_UNSPECIFIED = 0;
+  // 本局開始
+  ROUND_START = 1;
+  // 本局完成
+  ROUND_FINISHED = 2;
+  // 本局取消
+  ROUND_CANCELED = 3;
+
+  // 派發閒家例牌1
+  DEAL_PLAYER_1 = 4;
+  // 派發莊家例牌1
+  DEAL_BANKER_1 = 5;
+  // 派發閒家例牌2
+  DEAL_PLAYER_2 = 6;
+  // 派發莊家例牌2
+  DEAL_BANKER_2 = 7;
+
+  // 開放下注
+  OPEN_FOR_BETTING = 8;
+  // 倒數
+  COUNTDOWN = 27;
+  // 停止下注
+  CLOSE_THE_BETTING = 9;
+
+  // 非瞇牌開例牌
+  SHOW_NORMAL = 12;
+  // 瞇牌例牌
+  PEEK_NORMAL = 13;
+  // 瞇牌公布例牌
+  PEEK_SHOW_NORMAL = 14;
+
+  // 非瞇牌補閒家牌
+  DEAL_PLAYER_EXTRA = 16;
+  // 瞇牌閒家補牌
+  PEEK_DEAL_PLAYER_EXTRA = 17;
+  // 瞇牌公布閒家補牌
+  PEEK_SHOW_PLAYER_EXTRA = 18;
+
+  // 非瞇牌補莊家牌
+  DEAL_BANKER_EXTRA = 20;
+  // 瞇牌莊家補牌
+  PEEK_DEAL_BANKER_EXTRA= 21;
+  // 瞇牌公布莊家補牌
+  PEEK_SHOW_BANKER_EXTRA= 22;
+
+  // PITBOSS 修改派發例牌
+  PITBOSS_MODIFY_NORMAL = 24;
+  // PITBOSS 修改派發閒家補牌
+  PITBOSS_MODIFY_PLAYER_EXTRA = 25;
+  // PITBOSS 修改派發莊家補牌
+  PITBOSS_MODIFY_BANKER_EXTRA = 26;
+
+}
+
+// 座位功能代碼
+enum Seat {
+
+  // 未指定
+  SEAT_UNSPECIFIED = 0;
+  // Dealer
+  DEALER = 1;
+  // 閒家
+  PLAYER = 2;
+  // 莊家
+  BANKER = 3;
+  // Pitboss
+  PITBOSS = 9;
+
+}
+
+// 結果紀錄類型代碼
+enum ResultRecordType {
+
+  // 未指定
+  RESULT_RECORD_TYPE_UNSPECIFIED = 0;
+  // 遊戲局結束
+  ROUND_FINISH = 1;
+  // Pitboss 修正
+  PITBOSS_MODIFY_RESULT = 2;
+
+}
+
+// 取消原因
+enum CancelReason {
+
+  // 未指定，沒有取消
+  CANCEL_REASON_UNSPECIFIED = 0;
+  // 取消說明原因
+  NO_REASON = 1;
+
+}
+
+/**
+ * The state of the game flow
+ */
+enum GameState {
+  STATE_IDLE = 0;             // Idle
+  STATE_START = 1;            // Game Starting
+  STATE_COUNTER_START = 2;    // Counuter Started
+  STATE_INPUT = 3;            // Wait for input
+  STATE_END = 7;              // Game Ended
+  STATE_CONFIRM = 8;          // Game Ended
+}
+
+/**
+ * The status fo the current game.
+ */
+message GameStatus {
+  string sessionID = 1;     // Unique tableid
+  string gameRoundID = 2;   	// Unique session for the game
+  string tableID = 3;     	// Unique tableid
+  GameState state = 4;    	// State of the game
+  int64 startTime = 5;    	// Time when game start
+  string shoeID = 6;     	// Shoe ID
+  int32 ball1 = 10;     	// Value of the ball 1
+  int32 ball2 = 11;     	// Value of the ball 2
+  int32 ball3 = 12;     	// Value of the ball 3
+  int32 ball4 = 13;     	// Value of the ball 4
+  int32 ball5 = 14;     	// Value of the ball 5
+  int32 ball6 = 15;     	// Value of the ball 6
+  int32 ball7 = 16;     	// Value of the ball 7
+  int32 ball8 = 17;     	// Value of the ball 8
+  int32 ball9 = 18;     	// Value of the ball 9
+  int32 ball10 = 19;     	// Value of the ball 10
+  int32 countdown = 20;       // Coundown value
+  map<string, int32> lucky = 150;     // Lucky Number and payout ratio
+}
