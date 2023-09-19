@@ -248,6 +248,54 @@ message ShuffleRecord {
 
 }
 
+message Bead {
+  uint32 V = 1;
+  uint32 B = 2;
+  uint32 P = 3;
+  uint32 W = 4;
+  string gameRoundID = 5;
+  string video = 6;
+  uint32 Hl = 7;
+  map <string, uint32> LuckCards = 8;
+  int32 odds = 9;
+  int32 shoe = 10;
+  int32 round = 11;
+  repeated uint32 dice = 12;
+}
+
+message GameRoundInfo {
+  string gameRoundID = 1;
+  string A1 = 2;
+  string A2 = 3;
+  string A3 = 4;
+  string B1 = 5;
+  string B2 = 6;
+  string B3 = 7;
+  string ABw = 8;
+  string BBw = 9;
+  string Bv = 10;
+  string Pv = 11;
+  uint32 result = 12;
+  uint32 round = 13;
+  uint32 shoe = 14;
+  map <string, uint32> luckCards = 15;
+  string mul = 16;
+  string BPattern = 17;
+  string PPattern = 18;
+  uint32 B = 19;
+  uint32 P1 = 20;
+  uint32 P2 = 21;
+  uint32 P3 = 22;
+  uint32 P1W = 23;
+  uint32 P2W = 24;
+  uint32 P3W = 25;
+}
+
+message RoadMap {
+  repeated Bead beads = 1;
+  int32 columnLength = 2;
+}
+
 // 排班
 message ShiftRecord {
 
@@ -271,11 +319,28 @@ message ShiftRecord {
   // 執行遊戲局
   repeated string round_codes = 9;
 
-  // TODO: 路紙
-
   // 結束
   bool is_end = 12;
   // 結束時間
   google.protobuf.Timestamp ts_end = 13 [(tagger.tags) = "bson:\"tsEnd,omitempty\"" ];
-  
+
+  // TODO: 路紙
+  string tableID = 14;
+  string shoeID = 15;
+  int32 totalCount = 16;
+  int32 shoeRoundNum = 17;
+  // Statistic Map
+  map <string, int32> statistic = 20;
+  map <string, int32> comboStatistic = 21;
+  map <int32, int32> resultCount = 22;
+  map <string, int32> loShow = 23;
+  map <string, int32> loNoShow = 24;
+  map <string, int32> rcShow = 25;
+  map <string, int32> rcNoShow = 26;
+
+  repeated Bead beads = 27;
+  repeated GameRoundInfo info = 28;
+  map <string, GameRoundInfo> infoMap = 29;
+  RoadMap roadMap = 30;
+  repeated bytes roadMapBytes = 31;
 }
