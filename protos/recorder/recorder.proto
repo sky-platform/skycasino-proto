@@ -153,10 +153,10 @@ message RecordRoundFinishRequest {
 // 紀錄路紙
 message RecordRoadmapRequest {
 
-  // 班紀錄ID
-  bytes record_id = 1;
-  // TODO:
-
+  // 排班紀錄ID
+  bytes shift_id = 1;
+  // roadmap data
+  ShiftRecord record = 2;
 }
 
 // 紀錄回放
