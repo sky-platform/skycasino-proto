@@ -163,6 +163,8 @@ message RecordRoadmapCancelRequest {
 
   // 紀錄ID
   bytes shift_id = 1;
+  // roadmap data
+  ShiftRecord record = 4;
   // 時間
   google.protobuf.Timestamp ts_cancel = 5;
 }
