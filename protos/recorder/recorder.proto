@@ -155,10 +155,16 @@ message RecordRoadmapRequest {
 
   // 排班紀錄ID
   bytes shift_id = 1;
-  string tableID = 2;
-  string shoeID = 3;
   // roadmap data
   ShiftRecord record = 4;
+}
+
+message RecordRoadmapCancelRequest {
+
+  // 紀錄ID
+  bytes shift_id = 1;
+  // 時間
+  google.protobuf.Timestamp ts_cancel = 5;
 }
 
 // 紀錄回放
@@ -209,6 +215,9 @@ service RecorderService {
 
   // 紀錄路紙
   rpc RecordRoadmap (RecordRoadmapRequest) returns (google.protobuf.Empty);
+
+  // 此路紙作廢
+  rpc RecordRoadmapCancel(RecordRoadmapCancelRequest) returns (google.protobuf.Empty);
 
   // 紀錄回放
   rpc RecordRoundVideo(RecordRoundMediaRequest) returns (google.protobuf.Empty);
