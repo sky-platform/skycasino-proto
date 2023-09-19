@@ -914,6 +914,8 @@ type RecordRoadmapCancelRequest struct {
 
 	// 紀錄ID
 	ShiftId []byte `protobuf:"bytes,1,opt,name=shift_id,json=shiftId,proto3" json:"shift_id,omitempty"`
+	// roadmap data
+	Record *ShiftRecord `protobuf:"bytes,4,opt,name=record,proto3" json:"record,omitempty"`
 	// 時間
 	TsCancel *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=ts_cancel,json=tsCancel,proto3" json:"ts_cancel,omitempty"`
 }
@@ -953,6 +955,13 @@ func (*RecordRoadmapCancelRequest) Descriptor() ([]byte, []int) {
 func (x *RecordRoadmapCancelRequest) GetShiftId() []byte {
 	if x != nil {
 		return x.ShiftId
+	}
+	return nil
+}
+
+func (x *RecordRoadmapCancelRequest) GetRecord() *ShiftRecord {
+	if x != nil {
+		return x.Record
 	}
 	return nil
 }
@@ -1189,10 +1198,13 @@ var file_recorder_recorder_proto_rawDesc = []byte{
 	0x69, 0x66, 0x74, 0x49, 0x64, 0x12, 0x2d, 0x0a, 0x06, 0x72, 0x65, 0x63, 0x6f, 0x72, 0x64, 0x18,
 	0x04, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x15, 0x2e, 0x72, 0x65, 0x63, 0x6f, 0x72, 0x64, 0x65, 0x72,
 	0x2e, 0x53, 0x68, 0x69, 0x66, 0x74, 0x52, 0x65, 0x63, 0x6f, 0x72, 0x64, 0x52, 0x06, 0x72, 0x65,
-	0x63, 0x6f, 0x72, 0x64, 0x22, 0x70, 0x0a, 0x1a, 0x52, 0x65, 0x63, 0x6f, 0x72, 0x64, 0x52, 0x6f,
-	0x61, 0x64, 0x6d, 0x61, 0x70, 0x43, 0x61, 0x6e, 0x63, 0x65, 0x6c, 0x52, 0x65, 0x71, 0x75, 0x65,
-	0x73, 0x74, 0x12, 0x19, 0x0a, 0x08, 0x73, 0x68, 0x69, 0x66, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x01,
-	0x20, 0x01, 0x28, 0x0c, 0x52, 0x07, 0x73, 0x68, 0x69, 0x66, 0x74, 0x49, 0x64, 0x12, 0x37, 0x0a,
+	0x63, 0x6f, 0x72, 0x64, 0x22, 0x9f, 0x01, 0x0a, 0x1a, 0x52, 0x65, 0x63, 0x6f, 0x72, 0x64, 0x52,
+	0x6f, 0x61, 0x64, 0x6d, 0x61, 0x70, 0x43, 0x61, 0x6e, 0x63, 0x65, 0x6c, 0x52, 0x65, 0x71, 0x75,
+	0x65, 0x73, 0x74, 0x12, 0x19, 0x0a, 0x08, 0x73, 0x68, 0x69, 0x66, 0x74, 0x5f, 0x69, 0x64, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x07, 0x73, 0x68, 0x69, 0x66, 0x74, 0x49, 0x64, 0x12, 0x2d,
+	0x0a, 0x06, 0x72, 0x65, 0x63, 0x6f, 0x72, 0x64, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x15,
+	0x2e, 0x72, 0x65, 0x63, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x2e, 0x53, 0x68, 0x69, 0x66, 0x74, 0x52,
+	0x65, 0x63, 0x6f, 0x72, 0x64, 0x52, 0x06, 0x72, 0x65, 0x63, 0x6f, 0x72, 0x64, 0x12, 0x37, 0x0a,
 	0x09, 0x74, 0x73, 0x5f, 0x63, 0x61, 0x6e, 0x63, 0x65, 0x6c, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0b,
 	0x32, 0x1a, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62,
 	0x75, 0x66, 0x2e, 0x54, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x52, 0x08, 0x74, 0x73,
@@ -1345,43 +1357,44 @@ var file_recorder_recorder_proto_depIdxs = []int32{
 	17, // 10: recorder.RecordRoundCancelRequest.ts_cancel:type_name -> google.protobuf.Timestamp
 	17, // 11: recorder.RecordRoundFinishRequest.ts_finish:type_name -> google.protobuf.Timestamp
 	20, // 12: recorder.RecordRoadmapRequest.record:type_name -> recorder.ShiftRecord
-	17, // 13: recorder.RecordRoadmapCancelRequest.ts_cancel:type_name -> google.protobuf.Timestamp
-	16, // 14: recorder.RecordRoundMediaRequest.set:type_name -> recorder.RecordRoundMediaRequest.SetEntry
-	21, // 15: recorder.RecordRoundMediaRequest.add:type_name -> recorder.URLMedia
-	22, // 16: recorder.RecordShuffleDoneRequest.CardsEntry.value:type_name -> recorder.Deck
-	22, // 17: recorder.RecordShuffleEndRequest.CardsEntry.value:type_name -> recorder.Deck
-	21, // 18: recorder.RecordRoundMediaRequest.SetEntry.value:type_name -> recorder.URLMedia
-	1,  // 19: recorder.RecorderService.RecordShiftStarted:input_type -> recorder.RecordShiftStartedRequest
-	2,  // 20: recorder.RecorderService.RecordShiftEnded:input_type -> recorder.RecordShiftEndedRequest
-	3,  // 21: recorder.RecorderService.RecordShuffleStarted:input_type -> recorder.RecordShuffleStartedRequest
-	4,  // 22: recorder.RecorderService.RecordShuffleDone:input_type -> recorder.RecordShuffleDoneRequest
-	4,  // 23: recorder.RecorderService.RecordShuffleEnd:input_type -> recorder.RecordShuffleDoneRequest
-	6,  // 24: recorder.RecorderService.RecordRoundStart:input_type -> recorder.RecordRoundStartRequest
-	7,  // 25: recorder.RecorderService.RecordRoundSteps:input_type -> recorder.RecordRoundStepsRequest
-	8,  // 26: recorder.RecorderService.RecordRoundResults:input_type -> recorder.RecordRoundResultsRequest
-	9,  // 27: recorder.RecorderService.RecordRoundCancel:input_type -> recorder.RecordRoundCancelRequest
-	10, // 28: recorder.RecorderService.RecordRoundFinish:input_type -> recorder.RecordRoundFinishRequest
-	11, // 29: recorder.RecorderService.RecordRoadmap:input_type -> recorder.RecordRoadmapRequest
-	12, // 30: recorder.RecorderService.RecordRoadmapCancel:input_type -> recorder.RecordRoadmapCancelRequest
-	13, // 31: recorder.RecorderService.RecordRoundVideo:input_type -> recorder.RecordRoundMediaRequest
-	0,  // 32: recorder.RecorderService.RecordShiftStarted:output_type -> recorder.RecordIDResponse
-	23, // 33: recorder.RecorderService.RecordShiftEnded:output_type -> google.protobuf.Empty
-	0,  // 34: recorder.RecorderService.RecordShuffleStarted:output_type -> recorder.RecordIDResponse
-	23, // 35: recorder.RecorderService.RecordShuffleDone:output_type -> google.protobuf.Empty
-	23, // 36: recorder.RecorderService.RecordShuffleEnd:output_type -> google.protobuf.Empty
-	0,  // 37: recorder.RecorderService.RecordRoundStart:output_type -> recorder.RecordIDResponse
-	23, // 38: recorder.RecorderService.RecordRoundSteps:output_type -> google.protobuf.Empty
-	23, // 39: recorder.RecorderService.RecordRoundResults:output_type -> google.protobuf.Empty
-	23, // 40: recorder.RecorderService.RecordRoundCancel:output_type -> google.protobuf.Empty
-	23, // 41: recorder.RecorderService.RecordRoundFinish:output_type -> google.protobuf.Empty
-	23, // 42: recorder.RecorderService.RecordRoadmap:output_type -> google.protobuf.Empty
-	23, // 43: recorder.RecorderService.RecordRoadmapCancel:output_type -> google.protobuf.Empty
-	23, // 44: recorder.RecorderService.RecordRoundVideo:output_type -> google.protobuf.Empty
-	32, // [32:45] is the sub-list for method output_type
-	19, // [19:32] is the sub-list for method input_type
-	19, // [19:19] is the sub-list for extension type_name
-	19, // [19:19] is the sub-list for extension extendee
-	0,  // [0:19] is the sub-list for field type_name
+	20, // 13: recorder.RecordRoadmapCancelRequest.record:type_name -> recorder.ShiftRecord
+	17, // 14: recorder.RecordRoadmapCancelRequest.ts_cancel:type_name -> google.protobuf.Timestamp
+	16, // 15: recorder.RecordRoundMediaRequest.set:type_name -> recorder.RecordRoundMediaRequest.SetEntry
+	21, // 16: recorder.RecordRoundMediaRequest.add:type_name -> recorder.URLMedia
+	22, // 17: recorder.RecordShuffleDoneRequest.CardsEntry.value:type_name -> recorder.Deck
+	22, // 18: recorder.RecordShuffleEndRequest.CardsEntry.value:type_name -> recorder.Deck
+	21, // 19: recorder.RecordRoundMediaRequest.SetEntry.value:type_name -> recorder.URLMedia
+	1,  // 20: recorder.RecorderService.RecordShiftStarted:input_type -> recorder.RecordShiftStartedRequest
+	2,  // 21: recorder.RecorderService.RecordShiftEnded:input_type -> recorder.RecordShiftEndedRequest
+	3,  // 22: recorder.RecorderService.RecordShuffleStarted:input_type -> recorder.RecordShuffleStartedRequest
+	4,  // 23: recorder.RecorderService.RecordShuffleDone:input_type -> recorder.RecordShuffleDoneRequest
+	4,  // 24: recorder.RecorderService.RecordShuffleEnd:input_type -> recorder.RecordShuffleDoneRequest
+	6,  // 25: recorder.RecorderService.RecordRoundStart:input_type -> recorder.RecordRoundStartRequest
+	7,  // 26: recorder.RecorderService.RecordRoundSteps:input_type -> recorder.RecordRoundStepsRequest
+	8,  // 27: recorder.RecorderService.RecordRoundResults:input_type -> recorder.RecordRoundResultsRequest
+	9,  // 28: recorder.RecorderService.RecordRoundCancel:input_type -> recorder.RecordRoundCancelRequest
+	10, // 29: recorder.RecorderService.RecordRoundFinish:input_type -> recorder.RecordRoundFinishRequest
+	11, // 30: recorder.RecorderService.RecordRoadmap:input_type -> recorder.RecordRoadmapRequest
+	12, // 31: recorder.RecorderService.RecordRoadmapCancel:input_type -> recorder.RecordRoadmapCancelRequest
+	13, // 32: recorder.RecorderService.RecordRoundVideo:input_type -> recorder.RecordRoundMediaRequest
+	0,  // 33: recorder.RecorderService.RecordShiftStarted:output_type -> recorder.RecordIDResponse
+	23, // 34: recorder.RecorderService.RecordShiftEnded:output_type -> google.protobuf.Empty
+	0,  // 35: recorder.RecorderService.RecordShuffleStarted:output_type -> recorder.RecordIDResponse
+	23, // 36: recorder.RecorderService.RecordShuffleDone:output_type -> google.protobuf.Empty
+	23, // 37: recorder.RecorderService.RecordShuffleEnd:output_type -> google.protobuf.Empty
+	0,  // 38: recorder.RecorderService.RecordRoundStart:output_type -> recorder.RecordIDResponse
+	23, // 39: recorder.RecorderService.RecordRoundSteps:output_type -> google.protobuf.Empty
+	23, // 40: recorder.RecorderService.RecordRoundResults:output_type -> google.protobuf.Empty
+	23, // 41: recorder.RecorderService.RecordRoundCancel:output_type -> google.protobuf.Empty
+	23, // 42: recorder.RecorderService.RecordRoundFinish:output_type -> google.protobuf.Empty
+	23, // 43: recorder.RecorderService.RecordRoadmap:output_type -> google.protobuf.Empty
+	23, // 44: recorder.RecorderService.RecordRoadmapCancel:output_type -> google.protobuf.Empty
+	23, // 45: recorder.RecorderService.RecordRoundVideo:output_type -> google.protobuf.Empty
+	33, // [33:46] is the sub-list for method output_type
+	20, // [20:33] is the sub-list for method input_type
+	20, // [20:20] is the sub-list for extension type_name
+	20, // [20:20] is the sub-list for extension extendee
+	0,  // [0:20] is the sub-list for field type_name
 }
 
 func init() { file_recorder_recorder_proto_init() }
