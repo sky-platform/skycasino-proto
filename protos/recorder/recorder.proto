@@ -155,8 +155,10 @@ message RecordRoadmapRequest {
 
   // 排班紀錄ID
   bytes shift_id = 1;
+  string tableID = 2;
+  string shoeID = 3;
   // roadmap data
-  ShiftRecord record = 2;
+  ShiftRecord record = 4;
 }
 
 // 紀錄回放
