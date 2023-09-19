@@ -307,17 +307,21 @@ message ShiftRecord {
   string game_subtype = 3;
   // 遊戲版本
   string game_version = 4;
+  // 遊戲代碼
+  string game_code = 5;
   // 桌代碼
-  string table_code = 5;
+  string table_code = 6;
+  // 班代碼
+  string shift_code = 7;
   // 標籤
-  map<string, string> tags = 6 [(tagger.tags) = "bson:\"tags,omitempty\"" ];
+  map<string, string> tags = 8 [(tagger.tags) = "bson:\"tags,omitempty\"" ];
   // 開始時間
-  google.protobuf.Timestamp ts_start = 7;
+  google.protobuf.Timestamp ts_start = 9;
 
   // 洗牌
-  repeated string shuffle_codes = 8;
+  repeated string shuffle_codes = 10;
   // 執行遊戲局
-  repeated string round_codes = 9;
+  repeated string round_codes = 11;
 
   // 結束
   bool is_end = 12;
