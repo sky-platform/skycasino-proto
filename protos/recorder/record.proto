@@ -271,10 +271,10 @@ message GameRoundInfo {
   string B1 = 5;
   string B2 = 6;
   string B3 = 7;
-  string ABw = 8;
-  string BBw = 9;
-  string Bv = 10;
-  string Pv = 11;
+  uint32 ABw = 8;
+  uint32 BBw = 9;
+  uint32 Bv = 10;
+  uint32 Pv = 11;
   uint32 result = 12;
   uint32 round = 13;
   uint32 shoe = 14;
