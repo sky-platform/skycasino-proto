@@ -349,7 +349,7 @@ message RoadmapBead {
   string gameRoundID = 1;
   uint32 shoe = 2;
   uint32 round = 3;
-  map<string, URLMedia> mideas = 8;
+  string video = 4;
   string result = 5;
 
   BABead baBead = 11;
