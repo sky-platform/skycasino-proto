@@ -31,9 +31,9 @@ message Card {
 // 卡牌列表
 message CardList {
 
-  string card_type = 1;
+  string card_type = 2;
   // 列表
-  repeated Card list = 2;
+  repeated Card list = 3;
 
 }
 
@@ -248,51 +248,124 @@ message ShuffleRecord {
 
 }
 
-message Bead {
-  uint32 V = 1;
-  uint32 B = 2;
-  uint32 P = 3;
-  uint32 W = 4;
-  string gameRoundID = 5;
-  string video = 6;
-  uint32 Hl = 7;
-  map <string, uint32> LuckCards = 8;
-  int32 odds = 9;
-  int32 shoe = 10;
-  int32 round = 11;
-  repeated uint32 dice = 12;
+message BABead {
+  repeated string bankerCards = 1;
+  repeated string playerCards = 2;
+
+  int32 winnerPoint = 11;
+  int32 BankerPairPoint = 12;
+  int32 PlayerPairPoint = 13;
+
+  int32 hightLight = 21;
+  string multiplier = 22;
+
+  map<string, uint32> luckys = 31;
+  map<string, int32> statistics = 32;
 }
 
-message GameRoundInfo {
+message DTBead {
+  repeated string bankerCards = 1;
+  repeated string playerCards = 2;
+
+  int32 winnerPoint = 11;
+  uint32 bankerPoint = 12;
+  uint32 playerPoint = 13;
+
+  map<string, int32> statistics = 32;
+}
+
+message DIBead {
+  repeated uint32 dice = 1;
+
+  uint32 odds = 11;
+
+  map<string, uint32> luckys = 31;
+  map<string, int32> statistics = 32;
+}
+
+message LOBead {
+  repeated string bankerCards = 1;
+  repeated string playerCards = 2;
+
+  int32 winnerPoint = 11;
+  uint32 bankerPoint = 12;
+  uint32 playerPoint = 13;
+  int32 BankerPairPoint = 14;
+  int32 PlayerPairPoint = 15;
+
+  map<string, int32> statistics = 32;
+}
+
+message LWBead {
+  map<string, int32> statistics = 32;
+}
+
+message OXBead {
+  uint32 bankerType = 22;
+  uint32 playerXType = 23;
+  uint32 playerYType = 24;
+  uint32 playerZType = 25;
+
+  int32 playerXWin = 26;
+  int32 playerYWin = 27;
+  int32 playerZWin = 28;
+
+  map<string, int32> statistics = 32;
+}
+
+message RCBead {
+  repeated string bankerCards = 1;
+  repeated string playerCards = 2;
+
+  int32 winnerPoint = 11;
+  uint32 bankerPoint = 12;
+  uint32 playerPoint = 13;
+
+  map<string, int32> statistics = 32;
+}
+
+message ROBead {
+  uint32 odds = 11;
+
+  map<string, uint32> luckys = 31;
+  map<string, int32> statistics = 32;
+}
+
+message ZJHBead {
+  repeated string bankerCards = 1;
+  repeated string playerCards = 2;
+
+  string bankerPattern = 21;
+  string playerPattern = 22;
+
+  map<string, int32> statistics = 32;
+}
+
+message FanBead {
+  map<string, int32> statistics = 32;
+}
+
+message RoadmapBead {
   string gameRoundID = 1;
-  string A1 = 2;
-  string A2 = 3;
-  string A3 = 4;
-  string B1 = 5;
-  string B2 = 6;
-  string B3 = 7;
-  uint32 ABw = 8;
-  uint32 BBw = 9;
-  uint32 Bv = 10;
-  uint32 Pv = 11;
-  uint32 result = 12;
-  uint32 round = 13;
-  uint32 shoe = 14;
-  map <string, uint32> luckCards = 15;
-  string mul = 16;
-  string BPattern = 17;
-  string PPattern = 18;
-  uint32 B = 19;
-  uint32 P1 = 20;
-  uint32 P2 = 21;
-  uint32 P3 = 22;
-  uint32 P1W = 23;
-  uint32 P2W = 24;
-  uint32 P3W = 25;
+  uint32 shoe = 2;
+  uint32 round = 3;
+  map<string, URLMedia> mideas = 8;
+  string result = 5;
+
+  BABead baBead = 11;
+  DIBead diBead = 12;
+  DTBead dtBead = 13;
+  LOBead loBead = 14;
+  LWBead lwBead = 15;
+  OXBead oxBead = 16;
+  RCBead rcBead = 17;
+  ROBead roBead = 18;
+  ZJHBead zjhBead = 19;
+  FanBead fanBead = 20;
 }
 
 message RoadMap {
-  repeated Bead beads = 1;
+  repeated RoadmapBead beads = 1;
   int32 columnLength = 2;
 }
 
@@ -342,9 +415,5 @@ message ShiftRecord {
   map <string, int32> rcShow = 25;
   map <string, int32> rcNoShow = 26;
 
-  repeated Bead beads = 27;
-  repeated GameRoundInfo info = 28;
-  map <string, GameRoundInfo> infoMap = 29;
-  RoadMap roadMap = 30;
-  repeated bytes roadMapBytes = 31;
+  RoadMap roadmap = 31;
 }
