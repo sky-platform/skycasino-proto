@@ -347,10 +347,11 @@ message FanBead {
 
 message RoadmapBead {
   string gameRoundID = 1;
-  int32 shoe = 2;
-  int32 round = 3;
-  map<string, URLMedia> mideas = 8;
+  string shoeID = 2;
+  uint32 shoe = 3;
+  uint32 round = 4;
   string result = 5;
+  map<string, URLMedia> mideas = 8;
 
   BABead baBead = 11;
   DIBead diBead = 12;
