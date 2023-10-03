@@ -252,10 +252,12 @@ message BABead {
   repeated string bankerCards = 1;
   repeated string playerCards = 2;
 
-  int32 winnerPoint = 11;
-  int32 BankerPairPoint = 12;
-  int32 PlayerPairPoint = 13;
-
+  int32 bankerPoint = 11;
+  int32 playerPoint = 12;
+  bool bankerWin = 13;
+  bool playerWin = 14;
+  bool hasBankerPair = 15;
+  bool hasPlayerPair = 16;
   int32 hightLight = 21;
   string multiplier = 22;
 
@@ -267,9 +269,14 @@ message DTBead {
   repeated string bankerCards = 1;
   repeated string playerCards = 2;
 
-  int32 winnerPoint = 11;
+  string bankerBarCode = 3;
+  string playerBarCode = 4;
+ 
   int32 bankerPoint = 12;
   int32 playerPoint = 13;
+
+  bool bankerWin = 14;
+  bool playerWin = 15;
 
   map<string, int32> statistics = 32;
 }
@@ -277,55 +284,57 @@ message DTBead {
 message DIBead {
   repeated int32 dice = 1;
 
-  int32 odds = 11;
+  int32 total = 11;
+  int32 odd = 12;
+  int32 size = 13;
+  int32 tie = 14;
 
   map<string, int32> luckys = 31;
   map<string, int32> statistics = 32;
 }
 
 message LOBead {
-  repeated string bankerCards = 1;
-  repeated string playerCards = 2;
-
-  int32 winnerPoint = 11;
-  int32 bankerPoint = 12;
-  int32 playerPoint = 13;
-  int32 BankerPairPoint = 14;
-  int32 PlayerPairPoint = 15;
+  repeated int32 balls = 1;
 
   map<string, int32> statistics = 32;
 }
 
 message LWBead {
+  int32 direction = 1;
+  string value = 2;
+
   map<string, int32> statistics = 32;
 }
 
 message OXBead {
+  repeated string bankerCards = 1;
+  repeated string playerXCards = 2;
+  repeated string playerYCards = 3;
+  repeated string playerZCards = 4;
+  string firstCard = 5;
+
   int32 bankerType = 22;
   int32 playerXType = 23;
   int32 playerYType = 24;
   int32 playerZType = 25;
 
-  int32 playerXWin = 26;
-  int32 playerYWin = 27;
-  int32 playerZWin = 28;
+  bool playerXWin = 26;
+  bool playerYWin = 27;
+  bool playerZWin = 28;
 
   map<string, int32> statistics = 32;
 }
 
 message RCBead {
-  repeated string bankerCards = 1;
-  repeated string playerCards = 2;
-
-  int32 winnerPoint = 11;
-  int32 bankerPoint = 12;
-  int32 playerPoint = 13;
+  repeated int32 balls = 1;
 
   map<string, int32> statistics = 32;
 }
 
 message ROBead {
-  int32 odds = 11;
+  string raw = 1;
+  int32 value = 2;
+  int32 direction = 3;
 
   map<string, int32> luckys = 31;
   map<string, int32> statistics = 32;
@@ -334,14 +343,21 @@ message ROBead {
 message ZJHBead {
   repeated string bankerCards = 1;
   repeated string playerCards = 2;
-
-  string bankerPattern = 21;
-  string playerPattern = 22;
+  string bankerBarCode = 3;
+  string playerBarCode = 4;
+  string bankerResult = 5;
+  string playerResult = 6;
+  string bankerWinValue = 7;
+  string playerWinValue = 8;
 
   map<string, int32> statistics = 32;
 }
 
 message FanBead {
+  int32 count = 1;
+  int32 fan = 2;
+  int32 odd = 3;
+
   map<string, int32> statistics = 32;
 }
 
