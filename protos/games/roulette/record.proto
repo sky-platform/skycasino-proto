@@ -102,7 +102,7 @@ message GameStatus {
 
 message RoBead {
   string roundCode = 1;
-  string shoeID = 2;
+  string shoeCode = 2;
   uint32 shoe = 3;
   uint32 shoeRound = 4;
   string result = 5;
