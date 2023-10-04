@@ -1,6 +1,8 @@
 syntax = "proto3";
 package games.luckywheel;
 
+import "recorder/record.proto";
+
 enum ResourceType {
 
   // 未指定
@@ -96,4 +98,18 @@ message GameStatus {
   string maskedcardssn = 16;  // maskedcardssn for blockchain
   int32 countdown = 30;       // Coundown value
   map<string, int32> lucky = 150;     // Lucky Number and payout ratio
+}
+
+message LWBead {
+  string gameRoundID = 1;
+  string shoeID = 2;
+  uint32 shoe = 3;
+  uint32 round = 4;
+  string result = 5;
+  map<string, recorder.URLMedia> medias = 6;
+
+  int32 direction = 7;
+  string value = 8;
+
+  map<string, int32> statistics = 32;
 }

@@ -1,6 +1,8 @@
 syntax = "proto3";
 package games.lottery;
 
+import "recorder/record.proto";
+
 enum ResourceType {
 
   // 未指定
@@ -149,4 +151,17 @@ message GameStatus {
   int32 isBankerPair = 41;        // Banker Pair -1=unknown 0=false 1=true
   int32 isPlayerPair = 42;        // Player Pair-1=unknown 0=false 1=true
   map<string, int32> lucky = 150;     // Lucky Number and payout ratio
+}
+
+message LOBead {
+  string gameRoundID = 1;
+  string shoeID = 2;
+  uint32 shoe = 3;
+  uint32 round = 4;
+  string result = 5;
+  map<string, recorder.URLMedia> medias = 6;
+
+  repeated int32 balls = 7;
+
+  map<string, int32> statistics = 32;
 }

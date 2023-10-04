@@ -1,6 +1,8 @@
 syntax = "proto3";
 package games.thebigbattle;
 
+import "recorder/record.proto";
+
 enum ResourceType {
 
   // 未指定
@@ -140,4 +142,26 @@ message GameStatus {
   int32 hashedLength = 110;           // length of hashedCards
   map<string, int32> scannerType = 112;  // 0: barcode 1:image recognition
   map<string, int32> lucky = 150;     // Lucky Number and payout ratio
+}
+
+message DTBead {
+  string gameRoundID = 1;
+  string shoeID = 2;
+  uint32 shoe = 3;
+  uint32 round = 4;
+  string result = 5;
+  map<string, recorder.URLMedia> medias = 6;
+
+  repeated string bankerCards = 7;
+  repeated string playerCards = 8;
+
+  string bankerBarCode = 11;
+  string playerBarCode = 12;
+  int32 bankerPoint = 13;
+  int32 playerPoint = 14;
+  bool bankerWin = 15;
+  bool playerWin = 16;
+  string winType = 17;
+
+  map<string, int32> statistics = 32;
 }

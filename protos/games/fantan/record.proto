@@ -1,6 +1,8 @@
 syntax = "proto3";
 package games.fantan;
 
+import "recorder/record.proto";
+
 enum ResourceType {
 
   // 未指定
@@ -102,4 +104,20 @@ enum WinType {
   WIN_FAN2 = 2;
   WIN_FAN3 = 3;
   WIN_FAN4 = 4;
+}
+
+message FANBead {
+  string gameRoundID = 1;
+  string shoeID = 2;
+  uint32 shoe = 3;
+  uint32 round = 4;
+  string result = 5;
+  map<string, recorder.URLMedia> medias = 6;
+
+  int32 count = 7;
+  int32 fan = 8;
+  int32 odd = 9;
+  string winType = 10;
+
+  map<string, int32> statistics = 32;
 }

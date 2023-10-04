@@ -1,6 +1,8 @@
 syntax = "proto3";
 package games.bullfight;
 
+import "recorder/record.proto";
+
 enum ResourceType {
 
   // 未指定
@@ -199,4 +201,30 @@ message GameStatus {
   string cosmosShoeID = 109;          // cosmos blockchain id for the shoe
   int32 hashedLength = 110;           // length of hashedCards
   map<string, int32> lucky = 150;     // Lucky Number and payout ratio
+}
+
+message OXBead {
+  string gameRoundID = 1;
+  string shoeID = 2;
+  uint32 shoe = 3;
+  uint32 round = 4;
+  string result = 5;
+  map<string, recorder.URLMedia> medias = 6;
+
+  repeated string bankerCards = 7;
+  repeated string playerXCards = 8;
+  repeated string playerYCards = 9;
+  repeated string playerZCards = 10;
+  string firstCard = 11;
+
+  int32 bankerType = 12;
+  int32 playerXType = 13;
+  int32 playerYType = 14;
+  int32 playerZType = 15;
+  bool playerXWin = 16;
+  bool playerYWin = 17;
+  bool playerZWin = 18;
+  string winType = 19;
+
+  map<string, int32> statistics = 32;
 }
