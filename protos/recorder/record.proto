@@ -372,7 +372,7 @@ message RoadmapBead {
   uint32 shoe = 3;
   uint32 round = 4;
   string result = 5;
-  map<string, URLMedia> mideas = 8;
+  map<string, URLMedia> medias = 8;
 
   BABead baBead = 11;
   DIBead diBead = 12;
