@@ -1,6 +1,8 @@
 syntax = "proto3";
 package games.threecards;
 
+import "recorder/record.proto";
+
 enum ResourceType {
 
   // 未指定
@@ -170,4 +172,27 @@ message GameStatus {
   string cosmosShoeID = 109;          // cosmos blockchain id for the shoe
   int32 hashedLength = 110;           // length of hashedCards
   map<string, int32> lucky = 150;     // Lucky Number and payout ratio
+}
+
+message ZJHBead {
+  string gameRoundID = 1;
+  string shoeID = 2;
+  uint32 shoe = 3;
+  uint32 round = 4;
+  string result = 5;
+  map<string, recorder.URLMedia> medias = 6;
+
+  repeated string bankerCards = 7;
+  repeated string playerCards = 8;
+
+  string bankerBarCode = 11;
+  string playerBarCode = 12;
+  string bankerStyle = 13;
+  string playerStyle = 14;
+  string bankerWinPoint = 15;
+  string playerWinPoint = 16;
+  string winType = 17;
+  string winStyle = 18;
+
+  map<string, int32> statistics = 32;
 }
