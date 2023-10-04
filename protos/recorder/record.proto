@@ -315,14 +315,14 @@ message OXBead {
   repeated string playerZCards = 4;
   string firstCard = 5;
 
-  int32 bankerType = 22;
-  int32 playerXType = 23;
-  int32 playerYType = 24;
-  int32 playerZType = 25;
-
-  bool playerXWin = 26;
-  bool playerYWin = 27;
-  bool playerZWin = 28;
+  int32 bankerType = 11;
+  int32 playerXType = 12;
+  int32 playerYType = 13;
+  int32 playerZType = 14;
+  bool playerXWin = 15;
+  bool playerYWin = 16;
+  bool playerZWin = 17;
+  string winType = 18;
 
   map<string, int32> statistics = 32;
 }
