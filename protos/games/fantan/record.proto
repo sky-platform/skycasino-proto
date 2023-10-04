@@ -87,7 +87,7 @@ message GameStatus {
   int64 ts_start = 5;    	    // Time when game start
   string shoe_id = 6;     	        // Shoe ID
   int32 shoe =7;
-  int32 round =8;
+  int32 shoeRound =8;
   int32 count = 9;
   int32 fan = 10;
   int32 odd = 11;
@@ -106,13 +106,12 @@ enum WinType {
   WIN_FAN4 = 4;
 }
 
-message FANBead {
-  string gameRoundID = 1;
-  string shoeID = 2;
+message FanBead {
+  string roundCode = 1;
+  string shoeCode = 2;
   uint32 shoe = 3;
-  uint32 round = 4;
+  uint32 shoeRound = 4;
   string result = 5;
-  map<string, recorder.URLMedia> medias = 6;
 
   int32 count = 7;
   int32 fan = 8;

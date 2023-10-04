@@ -113,13 +113,13 @@ enum WinType {
 */
 message GameStatus {
   string sessionID = 1;       // Unique tableid
-  string gameRoundID = 2;     // Unique session for the game
+  string roundCode = 2;     // Unique session for the game
   string tableID = 3;         // Unique tableid
   GameState state = 4;        // State of the game
   int64 startTime = 5;        // Time when game start
-  string shoeID = 6;          // Shoe ID
+  string shoeCode = 6;          // Shoe ID
   int32 shoe =7;
-  int32 round =8;
+  int32 shoeRound =8;
   // game specify information
   string dragonCard = 10;     // Card slot Dragon
   string tigerCard = 11;      // Card slot Tiger
@@ -144,13 +144,12 @@ message GameStatus {
   map<string, int32> lucky = 150;     // Lucky Number and payout ratio
 }
 
-message DTBead {
-  string gameRoundID = 1;
-  string shoeID = 2;
+message DtBead {
+  string roundCode = 1;
+  string shoeCode = 2;
   uint32 shoe = 3;
-  uint32 round = 4;
+  uint32 shoeRound = 4;
   string result = 5;
-  map<string, recorder.URLMedia> medias = 6;
 
   repeated string bankerCards = 7;
   repeated string playerCards = 8;
