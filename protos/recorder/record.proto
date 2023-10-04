@@ -361,6 +361,7 @@ message FANBead {
   int32 count = 1;
   int32 fan = 2;
   int32 odd = 3;
+  string winType = 4;
 
   map<string, int32> statistics = 32;
 }
