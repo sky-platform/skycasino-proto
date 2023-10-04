@@ -258,6 +258,8 @@ message BABead {
   bool playerWin = 14;
   bool hasBankerPair = 15;
   bool hasPlayerPair = 16;
+  string winType = 17;
+
   int32 hightLight = 21;
   string multiplier = 22;
 
@@ -269,14 +271,13 @@ message DTBead {
   repeated string bankerCards = 1;
   repeated string playerCards = 2;
 
-  string bankerBarCode = 3;
-  string playerBarCode = 4;
- 
-  int32 bankerPoint = 12;
-  int32 playerPoint = 13;
-
-  bool bankerWin = 14;
-  bool playerWin = 15;
+  string bankerBarCode = 11;
+  string playerBarCode = 12;
+  int32 bankerPoint = 13;
+  int32 playerPoint = 14;
+  bool bankerWin = 15;
+  bool playerWin = 16;
+  string winType = 17;
 
   map<string, int32> statistics = 32;
 }
@@ -288,6 +289,7 @@ message DIBead {
   int32 odd = 12;
   int32 size = 13;
   int32 tie = 14;
+  int32 odds = 15;
 
   map<string, int32> luckys = 31;
   map<string, int32> statistics = 32;
@@ -343,17 +345,19 @@ message ROBead {
 message ZJHBead {
   repeated string bankerCards = 1;
   repeated string playerCards = 2;
-  string bankerBarCode = 3;
-  string playerBarCode = 4;
-  string bankerResult = 5;
-  string playerResult = 6;
-  string bankerWinValue = 7;
-  string playerWinValue = 8;
+  string bankerBarCode = 11;
+  string playerBarCode = 12;
+  string bankerStyle = 13;
+  string playerStyle = 14;
+  string bankerWinPoint = 15;
+  string playerWinPoint = 16;
+  string winType = 17;
+  string winStyle = 18;
 
   map<string, int32> statistics = 32;
 }
 
-message FanBead {
+message FANBead {
   int32 count = 1;
   int32 fan = 2;
   int32 odd = 3;
@@ -378,7 +382,7 @@ message RoadmapBead {
   RCBead rcBead = 17;
   ROBead roBead = 18;
   ZJHBead zjhBead = 19;
-  FanBead fanBead = 20;
+  FANBead fanBead = 20;
 }
 
 message RoadMap {
