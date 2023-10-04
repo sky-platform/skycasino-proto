@@ -249,8 +249,15 @@ message ShuffleRecord {
 }
 
 message BABead {
-  repeated string bankerCards = 1;
-  repeated string playerCards = 2;
+  string gameRoundID = 1;
+  string shoeID = 2;
+  uint32 shoe = 3;
+  uint32 round = 4;
+  string result = 5;
+  map<string, URLMedia> medias = 6;
+
+  repeated string bankerCards = 7;
+  repeated string playerCards = 8;
 
   int32 bankerPoint = 11;
   int32 playerPoint = 12;
@@ -268,8 +275,15 @@ message BABead {
 }
 
 message DTBead {
-  repeated string bankerCards = 1;
-  repeated string playerCards = 2;
+  string gameRoundID = 1;
+  string shoeID = 2;
+  uint32 shoe = 3;
+  uint32 round = 4;
+  string result = 5;
+  map<string, URLMedia> medias = 6;
+
+  repeated string bankerCards = 7;
+  repeated string playerCards = 8;
 
   string bankerBarCode = 11;
   string playerBarCode = 12;
@@ -283,7 +297,14 @@ message DTBead {
 }
 
 message DIBead {
-  repeated int32 dice = 1;
+  string gameRoundID = 1;
+  string shoeID = 2;
+  uint32 shoe = 3;
+  uint32 round = 4;
+  string result = 5;
+  map<string, URLMedia> medias = 6;
+
+  repeated int32 dice = 7;
 
   int32 total = 11;
   int32 odd = 12;
@@ -296,55 +317,98 @@ message DIBead {
 }
 
 message LOBead {
-  repeated int32 balls = 1;
+  string gameRoundID = 1;
+  string shoeID = 2;
+  uint32 shoe = 3;
+  uint32 round = 4;
+  string result = 5;
+  map<string, URLMedia> medias = 6;
+
+  repeated int32 balls = 7;
 
   map<string, int32> statistics = 32;
 }
 
 message LWBead {
-  int32 direction = 1;
-  string value = 2;
+  string gameRoundID = 1;
+  string shoeID = 2;
+  uint32 shoe = 3;
+  uint32 round = 4;
+  string result = 5;
+  map<string, URLMedia> medias = 6;
+
+  int32 direction = 7;
+  string value = 8;
 
   map<string, int32> statistics = 32;
 }
 
 message OXBead {
-  repeated string bankerCards = 1;
-  repeated string playerXCards = 2;
-  repeated string playerYCards = 3;
-  repeated string playerZCards = 4;
-  string firstCard = 5;
+  string gameRoundID = 1;
+  string shoeID = 2;
+  uint32 shoe = 3;
+  uint32 round = 4;
+  string result = 5;
+  map<string, URLMedia> medias = 6;
 
-  int32 bankerType = 11;
-  int32 playerXType = 12;
-  int32 playerYType = 13;
-  int32 playerZType = 14;
-  bool playerXWin = 15;
-  bool playerYWin = 16;
-  bool playerZWin = 17;
-  string winType = 18;
+  repeated string bankerCards = 7;
+  repeated string playerXCards = 8;
+  repeated string playerYCards = 9;
+  repeated string playerZCards = 10;
+  string firstCard = 11;
+
+  int32 bankerType = 12;
+  int32 playerXType = 13;
+  int32 playerYType = 14;
+  int32 playerZType = 15;
+  bool playerXWin = 16;
+  bool playerYWin = 17;
+  bool playerZWin = 18;
+  string winType = 19;
 
   map<string, int32> statistics = 32;
 }
 
 message RCBead {
-  repeated int32 balls = 1;
+  string gameRoundID = 1;
+  string shoeID = 2;
+  uint32 shoe = 3;
+  uint32 round = 4;
+  string result = 5;
+  map<string, URLMedia> medias = 6;
+
+  repeated int32 balls = 7;
 
   map<string, int32> statistics = 32;
 }
 
 message ROBead {
-  string raw = 1;
-  int32 value = 2;
-  int32 direction = 3;
+  string gameRoundID = 1;
+  string shoeID = 2;
+  uint32 shoe = 3;
+  uint32 round = 4;
+  string result = 5;
+  map<string, URLMedia> medias = 6;
+
+  string raw = 7;
+  int32 value = 8;
+  int32 direction = 9;
 
   map<string, int32> luckys = 31;
   map<string, int32> statistics = 32;
 }
 
 message ZJHBead {
-  repeated string bankerCards = 1;
-  repeated string playerCards = 2;
+  string gameRoundID = 1;
+  string shoeID = 2;
+  uint32 shoe = 3;
+  uint32 round = 4;
+  string result = 5;
+  map<string, URLMedia> medias = 6;
+
+  repeated string bankerCards = 7;
+  repeated string playerCards = 8;
+
   string bankerBarCode = 11;
   string playerBarCode = 12;
   string bankerStyle = 13;
@@ -358,37 +422,25 @@ message ZJHBead {
 }
 
 message FANBead {
-  int32 count = 1;
-  int32 fan = 2;
-  int32 odd = 3;
-  string winType = 4;
-
-  map<string, int32> statistics = 32;
-}
-
-message RoadmapBead {
   string gameRoundID = 1;
   string shoeID = 2;
   uint32 shoe = 3;
   uint32 round = 4;
   string result = 5;
-  map<string, URLMedia> medias = 8;
+  map<string, URLMedia> medias = 6;
 
-  BABead baBead = 11;
-  DIBead diBead = 12;
-  DTBead dtBead = 13;
-  LOBead loBead = 14;
-  LWBead lwBead = 15;
-  OXBead oxBead = 16;
-  RCBead rcBead = 17;
-  ROBead roBead = 18;
-  ZJHBead zjhBead = 19;
-  FANBead fanBead = 20;
+  int32 count = 7;
+  int32 fan = 8;
+  int32 odd = 9;
+  string winType = 10;
+
+  map<string, int32> statistics = 32;
 }
 
-message RoadMap {
-  repeated RoadmapBead beads = 1;
-  int32 columnLength = 2;
+message RoadMapColumn {
+  repeated google.protobuf.Any beads = 1;
+  int32 columnIndex = 2;
+  int32 columnLength = 3;
 }
 
 // 排班
@@ -437,5 +489,5 @@ message ShiftRecord {
   map <string, int32> rcShow = 25;
   map <string, int32> rcNoShow = 26;
 
-  RoadMap roadmap = 31;
+  repeated RoadMapColumn roadmapColumns = 31;
 }
