@@ -2,7 +2,6 @@ syntax = "proto3";
 package recorder;
 
 import "google/protobuf/timestamp.proto";
-import "google/protobuf/empty.proto";
 import "recorder/record.proto";
 
 message RecordQuery {
@@ -136,14 +135,80 @@ message FetchRoundRecordResponse {
 
 service RecorderReadService {
   
-  // 讀取班次紀錄
+  // 讀取班次紀錄list
   rpc FetchShiftRecord(FetchShiftRecordRequest) returns (FetchShiftRecordResponse);
 
-  // 讀牌靴紀錄
+  // 讀取最新班次紀錄
+  rpc FetchLastOneShiftRecord(FetchShiftRecordRequest) returns (FetchShiftRecordResponse);
+
+  // 讀牌靴紀錄list
   rpc FetchShoeRecord(FetchShoeRecordRequest) returns (FetchShoeRecordResponse);
 
-  // 讀遊戲局號紀錄
+  // 讀最新牌靴紀錄
+  rpc FetchLastOneShoeRecord(FetchShoeRecordRequest) returns (FetchShoeRecordResponse);
+
+  // 讀遊戲局號紀錄list
   rpc FetchRoundRecord(FetchRoundRecordRequest) returns (FetchRoundRecordResponse);
+
+  // 讀最新遊戲局號紀錄
+  rpc FetchLastOneRoundRecord(FetchRoundRecordRequest) returns (FetchRoundRecordResponse);
+}
+
+enum GameNotifyType {
+
+  // 未指定
+  GAME_NOTIFY_TYPE_UNSPECIFIED = 0;
+
+  // 通知遊戲上線
+  NOTIFY_GAME_ONLINE = 1;
+
+  // 通知遊戲維護
+  NOTIFY_GAME_MAINTENANCE = 2;
+
+  // 通知遊戲關閉
+  NOTIFY_GAME_CLOSE = 3;
+
+  // 通知遊戲荷官異動
+  NOTIFY_GAME_DEALER = 4;
+
+  // 通知遊戲媒體異動
+  NOTIFY_GAME_MEDIA = 5;
+
+  // 通知遊戲班開始
+  NOTIFY_SHIFT_START = 6;
+
+  // 通知遊戲班結束
+  NOTIRY_SHIFT_END = 7;
+
+  // 通知遊戲換靴
+  NOTIFY_SHOE_CHANGE = 8;
+
+  // 通知新靴開始
+  NOTIFY_SHOE_START = 9;
+
+  // 通知此靴結束
+  NOTIFY_SHOE_END = 10;
+
+  // 新局開始
+  NOTIFY_ROUND_START = 11;
+
+  // 通知遊戲局開始下注
+  NOTIFY_ROUND_BET = 12;
+
+  // 通知遊戲局結束下注
+  NOTIFY_ROUND_NO_MORE_BET = 13;
+
+  // 通知遊戲局進行步驟
+  NOTIFY_ROUND_STEP = 14;
+
+  // 遊戲局完成
+  NOTIFY_ROUND_FINISH = 15;
+
+  // 通知遊戲局取消
+  NOTIFY_ROUND_CANCEL = 16;
+
+  // 通知遊戲局回放連結
+  NOTIFY_ROUND_PLAYBACK = 17;
 
 }
 
@@ -160,11 +225,21 @@ message GameProvide {
   string game_code = 4;
 
   // 標籤
-  map<string, string> tags = 5;
+  repeated Tag tags = 15;
 
   // 維護中
   bool maintenance = 7;
-  
+
+  // 關閉中
+  bool close = 8;
+
+  // 附加媒體
+  map<string, URLMedia> map_mideas = 24;
+
+}
+
+message FetchGameProvideListRequest {
+  string platform = 1;
 }
 
 message FetchGameProvideListResponse {
@@ -219,11 +294,25 @@ message FetchCurrentGameResponse {
 
 }
 
+message FetchGameProvideRequest {
+  string platform = 1;
+
+  string game_codes = 2;
+}
+
+message FetchGameProvideResponse {
+  // 桌列表
+  GameProvide game_provide = 1;
+}
+
 // 遊戲供應商需要開放出來的被動接口
 service ProviderService {
   
   // 取得即時遊戲列表
-  rpc FetchGameProvideList(google.protobuf.Empty) returns (FetchGameProvideListResponse);
+  rpc FetchGameProvideList(FetchGameProvideListRequest) returns (FetchGameProvideListResponse);
+
+  // 取得單一即時遊戲資訊
+  rpc FetchGameProvide(FetchGameProvideRequest) returns (FetchGameProvideResponse);
 
   // 讀即時遊戲桌資訊
   rpc FetchCurrentGame(FetchCurrentGameRequest) returns (FetchCurrentGameResponse);

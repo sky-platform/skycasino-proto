@@ -21,7 +21,6 @@ jobs:
     needs: version
     uses: sky-platform/workflow/.github/workflows/packages-pnpm.yaml@main
     permissions:
-      id-token: write # This is required for requesting the JWT
       contents: read  # This is required for actions/checkout
       packages: write # This is required for publish package to github package
     secrets: inherit

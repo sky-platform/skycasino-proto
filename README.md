@@ -14,3 +14,11 @@ buf generate
 
 生成 tag 需在執行 generate 後跑
 buf generate --template buf.gen.tag.yaml
+
+``` shell
+
+pnpm gen:go
+pnpm gen:gotag
+pnpm prepare
+
+```

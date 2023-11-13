@@ -3,18 +3,23 @@ package cards;
 
 // empty Wheel
 enum Wheel {
-  WEEL_0_UNSPECIFIED = 0;
 
-  WEEL_1 = 1;
-  WEEL_2 = 2;
-  WEEL_3 = 3;
-  WEEL_4 = 4;
-  WEEL_5 = 5;
-  WEEL_6 = 6;
-  WEEL_7 = 7;
-  WEEL_8 = 8;
-  WEEL_9 = 9;
-  WEEL_10 = 10;
+  WHEEL_UNSPECIFIED = 0;
+
+  // 24格 1 倍
+  WHEEL24X1 = 1;
+  // 12格 3 倍
+  WHEEL12X3 = 2;
+  // 8格 5 倍
+  WHEEL8X5 = 3;
+  // 4格 10 倍
+  WHEEL4X10 = 4;
+  // 2格 20 倍
+  WHEEL2X20 = 5;
+  // 1格 45 倍
+  WHEELAX45 = 6;
+  // 1格 45 倍
+  WHEELBX45 = 7;
 
 }
 

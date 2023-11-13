@@ -8,7 +8,7 @@ import "tagger/tagger.proto";
 // 卡牌，代表在此局中使用的各類物品
 message Card {
 
-  // 卡牌ID：牌唯一碼，同ID表示同一張實體牌。不使用此欄位填0。
+  // 卡牌ID：牌唯一碼
   string id = 1;
   // 卡牌代碼
   string code = 2;
@@ -68,8 +68,8 @@ enum StepActionType {
 // 執行動作：對某些資源進行增、刪、移轉
 message StepAction {
 
-  // 行為說明代碼：StepActionCode
-  int32 code = 2;
+  // 行為說明代碼
+  string code = 2;
   // 動作類型
   StepActionType type = 3;
   // 資源擁有座位。
@@ -151,6 +151,17 @@ message URLMedia {
 
 }
 
+// 標籤
+message Tag {
+
+  // 鍵
+  string key = 1;
+
+  // 值
+  string value = 2;
+
+}
+
 // 紀錄
 message RoundRecord {
 
@@ -185,7 +196,7 @@ message RoundRecord {
   // key: SeatCode, value: 玩家code。
   map<int32, string> players = 14 [(tagger.tags) = "bson:\"players,omitempty\""];
   // 標籤
-  map<string, string> tags = 15 [(tagger.tags) = "bson:\"tags,omitempty\"" ];
+  repeated Tag tags = 15;
 
   // 歷程
   repeated Step process = 16 [(tagger.tags) = "bson:\"process,omitempty\""];
@@ -252,14 +263,6 @@ message ShoeRecord {
 
 }
 
-// RoadMapColumn
-message RoadMapColumn {
-  repeated google.protobuf.Any beads = 1;
-  int32 column_index = 2;
-  int32 column_length = 3;
-
-}
-
 // 排班
 message ShiftRecord {
 
@@ -280,7 +283,7 @@ message ShiftRecord {
   // 開始時間
   google.protobuf.Timestamp ts_start = 12;
   // 標籤
-  map<string, string> tags = 15 [(tagger.tags) = "bson:\"tags,omitempty\"" ];
+  repeated Tag tags = 15;
 
   // 執行遊戲局
   repeated string round_codes = 9;
@@ -291,21 +294,5 @@ message ShiftRecord {
   bool is_end = 18;
   // 結束時間
   google.protobuf.Timestamp ts_end = 19 [(tagger.tags) = "bson:\"tsEnd,omitempty\"" ];
-
-  // TODO: 路紙
-  // string table_code = 21;
-  string shoe_code = 22;
-  int32 total_count = 23;
-  int32 shoe_round_um = 24;
-  // Statistic Map
-  map <string, int32> statistic = 25;
-  map <string, int32> combo_statistic = 26;
-  map <int32, int32> result_count = 27;
-  map <string, int32> lo_show = 28;
-  map <string, int32> lo_no_show = 29;
-  map <string, int32> rc_show = 30;
-  map <string, int32> rc_no_show = 31;
-
-  repeated RoadMapColumn roadmap_columns = 32;
 
 }

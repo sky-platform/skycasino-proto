@@ -357,13 +357,13 @@ type ThreeCardsBead struct {
 	Result         string           `protobuf:"bytes,5,opt,name=result,proto3" json:"result" bson:"result" yaml:"result"`
 	BankerCards    []string         `protobuf:"bytes,7,rep,name=banker_cards,json=bankerCards,proto3" json:"bankerCards" bson:"bankerCards" yaml:"bankerCards"`
 	PlayerCards    []string         `protobuf:"bytes,8,rep,name=player_cards,json=playerCards,proto3" json:"playerCards" bson:"playerCards" yaml:"playerCards"`
-	BankerBarCode  string           `protobuf:"bytes,11,opt,name=banker_bar_code,json=bankerBarCode,proto3" json:"bankerBarCode" yaml:"bankerBarCode" bson:"bankerBarCode"`
-	PlayerBarCode  string           `protobuf:"bytes,12,opt,name=player_bar_code,json=playerBarCode,proto3" json:"playerBarCode" bson:"playerBarCode" yaml:"playerBarCode"`
+	BankerBarCode  string           `protobuf:"bytes,11,opt,name=banker_bar_code,json=bankerBarCode,proto3" json:"bankerBarCode" bson:"bankerBarCode" yaml:"bankerBarCode"`
+	PlayerBarCode  string           `protobuf:"bytes,12,opt,name=player_bar_code,json=playerBarCode,proto3" json:"playerBarCode" yaml:"playerBarCode" bson:"playerBarCode"`
 	BankerStyle    string           `protobuf:"bytes,13,opt,name=banker_style,json=bankerStyle,proto3" json:"bankerStyle" bson:"bankerStyle" yaml:"bankerStyle"`
 	PlayerStyle    string           `protobuf:"bytes,14,opt,name=player_style,json=playerStyle,proto3" json:"playerStyle" bson:"playerStyle" yaml:"playerStyle"`
 	BankerWinPoint string           `protobuf:"bytes,15,opt,name=banker_win_point,json=bankerWinPoint,proto3" json:"bankerWinPoint" bson:"bankerWinPoint" yaml:"bankerWinPoint"`
-	PlayerWinPoint string           `protobuf:"bytes,16,opt,name=player_win_point,json=playerWinPoint,proto3" json:"playerWinPoint" yaml:"playerWinPoint" bson:"playerWinPoint"`
-	WinType        string           `protobuf:"bytes,17,opt,name=win_type,json=winType,proto3" json:"winType" bson:"winType" yaml:"winType"`
+	PlayerWinPoint string           `protobuf:"bytes,16,opt,name=player_win_point,json=playerWinPoint,proto3" json:"playerWinPoint" bson:"playerWinPoint" yaml:"playerWinPoint"`
+	WinType        string           `protobuf:"bytes,17,opt,name=win_type,json=winType,proto3" json:"winType" yaml:"winType" bson:"winType"`
 	WinStyle       string           `protobuf:"bytes,18,opt,name=win_style,json=winStyle,proto3" json:"winStyle" bson:"winStyle" yaml:"winStyle"`
 	Statistics     map[string]int32 `protobuf:"bytes,32,rep,name=statistics,proto3" json:"statistics" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3" bson:"statistics" yaml:"statistics"`
 }

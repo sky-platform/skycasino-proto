@@ -28,7 +28,7 @@ message RecordShiftStartedRequest {
   // 時間
   google.protobuf.Timestamp ts_start = 12;
   // 標籤
-  map<string, string> tags = 15;
+  repeated Tag tags = 15;
 
 }
 
@@ -57,6 +57,8 @@ message RecordShoeStartedRequest {
   string shift_code = 7;
   // 洗牌代碼
   string shoe_code = 10;
+  // cardList
+  map<int32, Deck> decks = 11;
   // 時間
   google.protobuf.Timestamp ts_start = 12;
 
@@ -68,9 +70,6 @@ message RecordShoeEndedRequest {
   bytes record_id = 1;
   // 時間
   google.protobuf.Timestamp ts_end = 5;
-  // 洗牌類型
-  // key: ResourceTypeCode；value: 牌靴
-  map<int32, Deck> cards = 7;
 
 }
 
@@ -89,7 +88,7 @@ message RecordRoundStartedRequest {
   // 排班代碼
   string shift_code = 7;
   // 此排班局數
-  string shift_round = 8;
+  int64 shift_round = 8;
   // 局代碼
   string round_code = 9;
   // 使用洗牌代碼
@@ -99,7 +98,7 @@ message RecordRoundStartedRequest {
   // 開始時間
   google.protobuf.Timestamp ts_start = 12;
   // 標籤
-  map<string, string> tags = 15;
+  repeated Tag tags = 15;
 
 }
 

@@ -310,7 +310,7 @@ type RouletteBead struct {
 	Shoe       uint32           `protobuf:"varint,3,opt,name=shoe,proto3" json:"shoe" bson:"shoe" yaml:"shoe"`
 	ShoeRound  uint32           `protobuf:"varint,4,opt,name=shoe_round,json=shoeRound,proto3" json:"shoeRound" bson:"shoeRound" yaml:"shoeRound"`
 	Result     string           `protobuf:"bytes,5,opt,name=result,proto3" json:"result" bson:"result" yaml:"result"`
-	Raw        string           `protobuf:"bytes,7,opt,name=raw,proto3" json:"raw" bson:"raw" yaml:"raw"`
+	Raw        string           `protobuf:"bytes,7,opt,name=raw,proto3" json:"raw" yaml:"raw" bson:"raw"`
 	Value      int32            `protobuf:"varint,8,opt,name=value,proto3" json:"value" bson:"value" yaml:"value"`
 	Direction  int32            `protobuf:"varint,9,opt,name=direction,proto3" json:"direction" bson:"direction" yaml:"direction"`
 	Luckys     map[string]int32 `protobuf:"bytes,31,rep,name=luckys,proto3" json:"luckys" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3" bson:"luckys" yaml:"luckys"`

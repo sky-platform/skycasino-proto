@@ -283,11 +283,11 @@ type TheBigBattleBead struct {
 	RoundCode     string           `protobuf:"bytes,1,opt,name=round_code,json=roundCode,proto3" json:"roundCode" bson:"roundCode" yaml:"roundCode"`
 	ShoeCode      string           `protobuf:"bytes,2,opt,name=shoe_code,json=shoeCode,proto3" json:"shoeCode" bson:"shoeCode" yaml:"shoeCode"`
 	Shoe          uint32           `protobuf:"varint,3,opt,name=shoe,proto3" json:"shoe" bson:"shoe" yaml:"shoe"`
-	ShoeRound     uint32           `protobuf:"varint,4,opt,name=shoe_round,json=shoeRound,proto3" json:"shoeRound" bson:"shoeRound" yaml:"shoeRound"`
+	ShoeRound     uint32           `protobuf:"varint,4,opt,name=shoe_round,json=shoeRound,proto3" json:"shoeRound" yaml:"shoeRound" bson:"shoeRound"`
 	Result        string           `protobuf:"bytes,5,opt,name=result,proto3" json:"result" bson:"result" yaml:"result"`
-	BankerCards   []string         `protobuf:"bytes,7,rep,name=banker_cards,json=bankerCards,proto3" json:"bankerCards" bson:"bankerCards" yaml:"bankerCards"`
+	BankerCards   []string         `protobuf:"bytes,7,rep,name=banker_cards,json=bankerCards,proto3" json:"bankerCards" yaml:"bankerCards" bson:"bankerCards"`
 	PlayerCards   []string         `protobuf:"bytes,8,rep,name=player_cards,json=playerCards,proto3" json:"playerCards" bson:"playerCards" yaml:"playerCards"`
-	BankerBarCode string           `protobuf:"bytes,11,opt,name=banker_bar_code,json=bankerBarCode,proto3" json:"bankerBarCode" yaml:"bankerBarCode" bson:"bankerBarCode"`
+	BankerBarCode string           `protobuf:"bytes,11,opt,name=banker_bar_code,json=bankerBarCode,proto3" json:"bankerBarCode" bson:"bankerBarCode" yaml:"bankerBarCode"`
 	PlayerBarCode string           `protobuf:"bytes,12,opt,name=player_bar_code,json=playerBarCode,proto3" json:"playerBarCode" bson:"playerBarCode" yaml:"playerBarCode"`
 	BankerPoint   int32            `protobuf:"varint,13,opt,name=banker_point,json=bankerPoint,proto3" json:"bankerPoint" bson:"bankerPoint" yaml:"bankerPoint"`
 	PlayerPoint   int32            `protobuf:"varint,14,opt,name=player_point,json=playerPoint,proto3" json:"playerPoint" bson:"playerPoint" yaml:"playerPoint"`
